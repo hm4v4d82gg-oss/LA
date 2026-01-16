@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 美西孝親之旅</title>
+    <style>
+        /* --- 基礎設定 --- */
+        :root {
+            --primary: #00897b; /* 穩重的藍綠色 */
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --danger: #e53935;
+        }
+        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; /* 預留底部選單空間 */
+            font-size: 18px; /* 長輩友善大字體 */
+            line-height: 1.6;
+        }
+
+        /* --- 頂部標題 --- */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 { margin: 0; font-size: 22px; }
+        header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+
+        /* --- 內容區塊卡片 --- */
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px; }
+        h3 { margin: 15px 0 10px; font-size: 19px; color: #444; }
+
+        /* --- 列表與表格 --- */
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; }
+        
+        .time-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .time-table th, .time-table td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #eee; }
+        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; }
+        
+        /* --- 重點提示框 (Admonition) --- */
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+        }
+        .alert.danger { background-color: #ffebee; border-left-color: var(--danger); }
+        .alert strong { display: block; margin-bottom: 5px; font-size: 1.1em; }
+
+        /* --- 按鈕 --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* --- 底部導覽列 --- */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            overflow-x: auto; /* 允許橫向滑動 */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        
+        .tab {
+            flex: 0 0 auto; /* 不壓縮 */
+            padding: 8px 20px;
+            text-align: center;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-size: 14px;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* 隱藏未選中的頁面 */
+        .page { display: none; animation: fadeIn 0.3s; }
+        .page.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 id="header-title">2026 美西孝親之旅</h1>
+    <p>2/13 - 2/22 (共10天)</p>
+</header>
+
+<div class="container">
+
+    <!-- 首頁 / 總覽 -->
+    <div id="home" class="page active">
+        <div class="alert danger">
+            <strong>🆘 緊急聯絡</strong>
+            兒子的電話: +1-123-456-7890<br>
+            外交部急難救助: +1-213-382-7720
+        </div>
+        
+        <div class="card">
+            <h2>行程總表</h2>
+            <table class="time-table">
+                <tr><th>2/13</th><td>抵達洛杉磯，取車休息</td></tr>
+                <tr><th>2/14</th><td>蓋蒂中心，聖塔莫尼卡</td></tr>
+                <tr><th>2/15</th><td>好萊塢，天文台</td></tr>
+                <tr><th>2/16</th><td>前往聖塔芭芭拉</td></tr>
+                <tr><th>2/17</th><td>丹麥村 Solvang</td></tr>
+                <tr><th>2/18</th><td>蒙特雷 17哩海岸</td></tr>
+                <tr><th>2/19</th><td>水族館，往舊金山</td></tr>
+                <tr><th>2/20</th><td>金門大橋，九曲花街</td></tr>
+                <tr><th>2/21</th><td>漁人碼頭，渡輪大廈</td></tr>
+                <tr><th>2/22</th><td>前往機場返家</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Day 1 -->
+    <div id="day1" class="page">
+        <div class="card">
+            <h2>Day 1: 抵達洛杉磯</h2>
+            <div class="alert">
+                <strong>💡 本日重點</strong>
+                長途飛行辛苦了，今天只求順利取車，早點回飯店調時差。
+            </div>
+            <table class="time-table">
+                <tr><th>14:00</th><td>抵達 LAX 機場 (TBIT航廈)</td></tr>
+                <tr><th>15:30</th><td>搭乘接駁車前往 Hertz 取車</td></tr>
+                <tr><th>17:00</th><td>飯店 Check-in</td></tr>
+                <tr><th>18:00</th><td>晚餐：飯店附近輕食</td></tr>
+            </table>
+            <h3>🏨 住宿資訊</h3>
+            <p><strong>Hilton Santa Monica</strong><br>
+            地址：1707 4th St, Santa Monica<br>
+            電話：+1 310-395-3332</p>
+            <a href="https://maps.google.com/?q=Hilton+Santa+Monica" target="_blank" class="btn">開啟 Google 導航</a>
+        </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div id="day2" class="page">
+        <div class="card">
+            <h2>Day 2: 洛杉磯藝文</h2>
+            <table class="time-table">
+                <tr><th>09:30</th><td>前往蓋蒂中心 (The Getty)</td></tr>
+                <tr><th>12:30</th><td>午餐：館內景觀餐廳</td></tr>
+                <tr><th>15:00</th><td>聖塔莫尼卡海灘散步</td></tr>
+                <tr><th>18:00</th><td>晚餐：韓國城豆腐鍋</td></tr>
+            </table>
+            <div class="alert">
+                <strong>⚠️ 貼心提醒</strong>
+                蓋蒂中心要搭電車上山，記得帶薄外套，山上風大。
+            </div>
+        </div>
+    </div>
+    
+    <!-- Day 3 -->
+    <div id="day3" class="page">
+        <div class="card">
+            <h2>Day 3: 好萊塢電影夢</h2>
+            <table class="time-table">
+                <tr><th>10:00</th><td>格里斐斯天文台 (看好萊塢標誌)</td></tr>
+                <tr><th>13:00</th><td>農夫市場午餐</td></tr>
+                <tr><th>15:00</th><td>比佛利山莊開車遊車河</td></tr>
+            </table>
+            <h3>🏨 住宿資訊</h3>
+            <p>續住 Santa Monica</p>
+        </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div id="day4" class="page">
+        <div class="card">
+            <h2>Day 4: 往北出發</h2>
+            <p>今天開始公路旅行，車程約 2 小時。</p>
+            <table class="time-table">
+                <tr><th>10:00</th><td>Check-out 出發</td></tr>
+                <tr><th>12:00</th><td>抵達 Santa Barbara</td></tr>
+                <tr><th>14:00</th><td>參觀法院鐘樓 (有電梯)</td></tr>
+                <tr><th>16:00</th><td>史登碼頭散步</td></tr>
+            </table>
+            <h3>🏨 住宿資訊</h3>
+            <p><strong>Hotel Californian</strong><br>
+            地址：36 State St, Santa Barbara</p>
+            <a href="https://maps.google.com/?q=Hotel+Californian+Santa+Barbara" target="_blank" class="btn">開啟 Google 導航</a>
+        </div>
+    </div>
+    
+    <!-- Day 5 -->
+    <div id="day5" class="page">
+        <div class="card">
+            <h2>Day 5: 丹麥村</h2>
+            <table class="time-table">
+                <tr><th>10:00</th><td>前往 Solvang (丹麥村)</td></tr>
+                <tr><th>12:00</th><td>午餐：丹麥鬆餅/香腸</td></tr>
+                <tr><th>15:00</th><td>前往蒙特雷 (車程較長)</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div id="day6" class="page">
+        <div class="card">
+            <h2>Day 6: 蒙特雷海岸</h2>
+            <div class="alert">
+                <strong>📸 拍照重點</strong>
+                今天的 17哩路 (17-Mile Drive) 非常美，我們會開車慢慢逛。
+            </div>
+            <table class="time-table">
+                <tr><th>10:00</th><td>進入 17-Mile Drive</td></tr>
+                <tr><th>12:30</th><td>Carmel 小鎮午餐</td></tr>
+                <tr><th>15:00</th><td>回飯店休息/海邊散步</td></tr>
+            </table>
+            <h3>🏨 住宿資訊</h3>
+            <p><strong>Monterey Plaza Hotel</strong><br>
+            地址：400 Cannery Row, Monterey</p>
+        </div>
+    </div>
+    
+    <!-- Day 7 -->
+    <div id="day7" class="page">
+        <div class="card">
+            <h2>Day 7: 前往舊金山</h2>
+            <table class="time-table">
+                <tr><th>09:30</th><td>蒙特雷灣水族館</td></tr>
+                <tr><th>14:00</th><td>開車前往舊金山 (約2小時)</td></tr>
+                <tr><th>16:30</th><td>抵達舊金山 Check-in</td></tr>
+            </table>
+            <div class="alert danger">
+                <strong>⚠️ 舊金山停車注意</strong>
+                車內絕對不要留任何包包或外套，以免被破窗。
+            </div>
+        </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div id="day8" class="page">
+        <div class="card">
+            <h2>Day 8: 舊金山地標</h2>
+            <table class="time-table">
+                <tr><th>10:00</th><td>金門大橋 (開車經過)</td></tr>
+                <tr><th>11:30</th><td>藝術宮</td></tr>
+                <tr><th>14:00</th><td>九曲花街 (開車體驗)</td></tr>
+                <tr><th>18:00</th><td>晚餐：中國城</td></tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Day 9 -->
+    <div id="day9" class="page">
+        <div class="card">
+            <h2>Day 9: 海灣風情</h2>
+            <table class="time-table">
+                <tr><th>10:00</th><td>渡輪大廈市集</td></tr>
+                <tr><th>13:00</th><td>漁人碼頭看海獅</td></tr>
+                <tr><th>15:00</th><td>搭船遊海灣 (Blue & Gold Fleet)</td></tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Day 10 -->
+    <div id="day10" class="page">
+        <div class="card">
+            <h2>Day 10: 平安返家</h2>
+            <table class="time-table">
+                <tr><th>09:00</th><td>整理行李 Check-out</td></tr>
+                <tr><th>10:00</th><td>前往 SFO 機場</td></tr>
+                <tr><th>10:30</th><td>還車 (Rental Car Return)</td></tr>
+                <tr><th>13:00</th><td>飛機起飛</td></tr>
+            </table>
+            <div class="alert">
+                <strong>✈️ 航班資訊</strong>
+                航班：BR007 / CI003<br>
+                航廈：International Terminal A
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 底部導覽列 -->
+<nav class="tab-bar">
+    <div class="tab active" onclick="switchTab('home')">總覽</div>
+    <div class="tab" onclick="switchTab('day1')">D1</div>
+    <div class="tab" onclick="switchTab('day2')">D2</div>
+    <div class="tab" onclick="switchTab('day3')">D3</div>
+    <div class="tab" onclick="switchTab('day4')">D4</div>
+    <div class="tab" onclick="switchTab('day5')">D5</div>
+    <div class="tab" onclick="switchTab('day6')">D6</div>
+    <div class="tab" onclick="switchTab('day7')">D7</div>
+    <div class="tab" onclick="switchTab('day8')">D8</div>
+    <div class="tab" onclick="switchTab('day9')">D9</div>
+    <div class="tab" onclick="switchTab('day10')">D10</div>
+</nav>
+
+<script>
+    function switchTab(pageId) {
+        // 隱藏所有頁面
+        document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+        // 移除所有 Tab 啟用狀態
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+        
+        // 顯示目標頁面
+        document.getElementById(pageId).classList.add('active');
+        // 設定 Tab 啟用狀態
+        event.target.classList.add('active');
+        
+        // 自動回到頂端
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
+
+
