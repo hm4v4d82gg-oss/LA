@@ -1,0 +1,126 @@
+site_name: 2026 美西孝親之旅
+site_url: https://hm4v4d82gg-oss.github.io/usa-trip-2026/
+repo_url: https://github.com/hm4v4d82gg-oss/usa-trip-2026
+edit_uri: ""
+
+theme:
+  name: material
+  language: zh-Hant
+  palette: 
+    scheme: default
+    primary: teal
+    accent: deep_orange
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - navigation.tracking
+  icon:
+    logo: material/airplane
+
+extra:
+  manifest:
+    name: 美西之旅
+    short_name: 美西之旅
+    start_url: .
+    display: standalone
+    background_color: "#ffffff"
+    theme_color: "#009688"
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - 首頁總覽: index.md
+  - 行前準備:
+    - 航班資訊: prep/flight.md
+    - 行李清單: prep/packing.md
+    - 緊急聯絡: prep/emergency.md
+  - 每日行程:
+    - Day 1 (2/13) 抵達洛杉磯: itinerary/day1.md
+    - Day 2 (2/14) 洛杉磯藝文: itinerary/day2.md
+    - Day 3 (2/15) 好萊塢: itinerary/day3.md
+    - Day 4 (2/16) 聖塔芭芭拉: itinerary/day4.md
+    - Day 5 (2/17) 丹麥村: itinerary/day5.md
+    - Day 6 (2/18) 蒙特雷: itinerary/day6.md
+:root {
+  /* 加大基礎字體至 18px (預設約 16px) */
+  --md-text-font-size: 18px; 
+}
+
+/* 讓表格在手機上可以橫向滑動，避免跑版 */
+.md-typeset table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* 圖片圓角與陰影 */
+.md-typeset img {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 強調區塊字體加大 */
+.md-typeset .admonition-title {
+    font-size: 1.1em;
+}
+
+    - Day 7 (2/19) 往舊金山: itinerary/day7.md
+    - Day 8 (2/20) 舊金山地標: itinerary/day8.md
+    - Day 9 (2/21) 漁人碼頭: itinerary/day9.md
+    - Day 10 (2/22) 返程: itinerary/day10.md
+
+# 歡迎參加 2026 美西之旅 🇺🇸
+
+這是專為大家準備的數位導遊手冊。點擊上方的標籤或左側選單，可以看到每一天的詳細安排。
+
+## 📅 行程總覽
+| 日期 | 星期 | 城市 | 重點行程 |
+| :--- | :--- | :--- | :--- |
+| **2/13** | 五 | 洛杉磯 | 🛬 抵達、取車休息 |
+| **2/14** | 六 | 洛杉磯 | 🎨 蓋蒂中心、聖塔莫尼卡 |
+| **2/15** | 日 | 洛杉磯 | 🎬 天文台、好萊塢 |
+| **2/16** | 一 | 聖塔芭芭拉 | 🏖️ 西班牙風情法院 |
+| **2/17** | 二 | 索爾萬 | 🇩🇰 丹麥村漫步 |
+| **2/18** | 三 | 蒙特雷 | 🌊 17哩海岸線 |
+| **2/19** | 四 | 舊金山 | 🐠 水族館、移動日 |
+| **2/20** | 五 | 舊金山 | 🌉 金門大橋、九曲花街 |
+| **2/21** | 六 | 舊金山 | 🦀 漁人碼頭、渡輪大廈 |
+| **2/22** | 日 | 台北 | 🛫 前往機場返家 |
+
+!!! info "如何使用這個網頁"
+    *   **手機版**：點擊左上角的 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg></span> 選單可以切換日期。
+    *   **導航**：行程中藍色的連結點下去會直接開 Google Maps。
+
+!!! failure "緊急聯絡"
+    如果走散了，請留在原地並打電話給：
+    *   **兒子**: +1-123-456-7890 (Line ID: xxxx)
+    *   **飯店**: 請參考當日行程頁面
+name: ci 
+on:
+  push:
+    branches:
+      - main
+      - master
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material 
+      - run: mkdocs gh-deploy --force
+
