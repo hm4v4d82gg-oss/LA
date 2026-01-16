@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 美西孝親之旅 (可編輯版)</title>
+    <title>2026 美西孝親之旅 (詳細版)</title>
     <style>
-        :root { --primary: #00897b; --bg: #f5f5f5; --card-bg: #ffffff; --text: #333; --danger: #e53935; }
+        :root { --primary: #00897b; --bg: #f5f5f5; --card-bg: #ffffff; --text: #333; --danger: #e53935; --highlight: #e0f2f1; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; font-size: 18px; line-height: 1.6; }
         header { background: var(--primary); color: white; padding: 15px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
@@ -14,35 +14,50 @@
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px; }
         h3 { margin: 15px 0 10px; font-size: 18px; color: #444; font-weight: bold; }
-        ul { padding-left: 20px; margin: 10px 0; } li { margin-bottom: 8px; }
-        .time-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .time-table th, .time-table td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #eee; }
-        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; vertical-align: top; font-weight: bold; }
+        
+        /* 表格樣式 */
+        .time-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin-top: 5px; }
+        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; vertical-align: top; font-weight: bold; padding: 5px; }
+        .time-table td { padding: 5px; vertical-align: top; }
+        
+        /* --- 摺疊詳細資訊樣式 (Accordion) --- */
+        details { margin-bottom: 5px; width: 100%; }
+        summary { cursor: pointer; color: #0277bd; font-weight: 500; list-style: none; position: relative; padding-right: 20px; }
+        summary::-webkit-details-marker { display: none; } /* 隱藏預設箭頭 */
+        summary::after { content: '+'; position: absolute; right: 0; color: #999; font-weight: bold; }
+        details[open] summary::after { content: '-'; color: var(--primary); }
+        
+        /* 展開後的內容區塊 */
+        .detail-content { 
+            background: var(--highlight); 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            margin-top: 8px; 
+            font-size: 0.9em; 
+            color: #444;
+            border-left: 3px solid var(--primary);
+        }
+
         .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; background: #e3f2fd; border-left: 5px solid #2196f3; }
         .alert.danger { background: #ffebee; border-left-color: var(--danger); }
-        .alert strong { display: block; margin-bottom: 5px; font-size: 1.1em; }
         .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 15px; margin-top: 10px; text-align: center; width: 100%; }
         
         /* 底部 Tab */
         .tab-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; overflow-x: auto; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 0; }
-        .tab { flex: 0 0 auto; padding: 8px 18px; text-align: center; color: #888; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; }
-        .tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: bold; }
+        .tab { flex: 0 0 auto; padding: 8px 15px; text-align: center; color: #888; cursor: pointer; font-size: 14px; min-width: 60px; }
+        .tab.active { color: var(--primary); font-weight: bold; border-bottom: 2px solid var(--primary); }
         .page { display: none; } .page.active { display: block; }
 
-        /* --- 編輯模式樣式 --- */
+        /* 編輯模式 */
         [contenteditable="true"] { border: 1px dashed #ccc; padding: 2px; min-height: 20px; background: #fffbe6; }
-        [contenteditable="true"]:focus { outline: 2px solid var(--primary); background: #fff; }
-        
-        /* 浮動編輯按鈕 */
         .fab-container { position: fixed; bottom: 90px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
-        .fab { width: 50px; height: 50px; border-radius: 25px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; border: none; font-size: 20px; }
+        .fab { width: 50px; height: 50px; border-radius: 25px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: none; font-size: 20px; cursor: pointer; }
         .fab.save { background: #4caf50; display: none; }
         .fab.export { background: #ff9800; display: none; }
     </style>
 </head>
 <body>
 
-<!-- 浮動按鈕群 -->
 <div class="fab-container">
     <button class="fab" id="editBtn" onclick="toggleEditMode()">✏️</button>
     <button class="fab save" id="saveBtn" onclick="saveContent()">💾</button>
@@ -65,31 +80,73 @@
                 外交部急難救助: +1-213-382-7720
             </div>
         </div>
-        
         <div class="card">
             <h2 class="editable">行程總表</h2>
-            <table class="time-table">
-                <tr><th class="editable">2/13</th><td class="editable">抵達洛杉磯，取車休息</td></tr>
-                <tr><th class="editable">2/14</th><td class="editable">蓋蒂中心，聖塔莫尼卡</td></tr>
-                <tr><th class="editable">2/15</th><td class="editable">好萊塢，天文台</td></tr>
-                <!-- 您可以在編輯模式下直接複製整行 HTML 貼上來新增 -->
-            </table>
+            <p class="editable">點擊下方選單切換每日詳情</p>
+            <!-- 這裡為了簡潔只放摘要，詳細請點每日 -->
         </div>
     </div>
 
-    <!-- [Day 1] -->
+    <!-- [Day 1] 包含詳細資訊 Demo -->
     <div id="day1" class="page">
         <div class="card">
             <h2 class="editable">Day 1: 抵達洛杉磯</h2>
             <div class="alert">
                 <strong class="editable">💡 本日重點</strong>
-                <div class="editable">長途飛行辛苦了，今天目標只有順利取車，早點回飯店休息調時差。</div>
+                <div class="editable">長途飛行辛苦了，今天目標只有順利取車，早點回飯店休息。</div>
             </div>
+            
             <table class="time-table">
-                <tr><th class="editable">14:00</th><td class="editable">抵達 LAX 機場 (TBIT航廈)</td></tr>
-                <tr><th class="editable">15:30</th><td class="editable">搭乘接駁車前往 Hertz 取車</td></tr>
-                <tr><th class="editable">17:00</th><td class="editable">飯店 Check-in</td></tr>
+                <!-- 01. 機場 -->
+                <tr>
+                    <th class="editable">14:00</th>
+                    <td>
+                        <details>
+                            <summary class="editable">抵達 LAX 機場 (TBIT)</summary>
+                            <div class="detail-content editable">
+                                <strong>入境提示：</strong><br>
+                                1. 跟著 "Arrivals" 指標走。<br>
+                                2. 過海關時把「全家人的護照」一起給官員。<br>
+                                3. 領行李在轉盤 4 號。<br>
+                                4. 出來後往右轉找 "Rental Car Shuttles" 標誌。
+                            </div>
+                        </details>
+                    </td>
+                </tr>
+                
+                <!-- 02. 取車 -->
+                <tr>
+                    <th class="editable">15:30</th>
+                    <td>
+                        <details>
+                            <summary class="editable">搭接駁車取車 (Hertz)</summary>
+                            <div class="detail-content editable">
+                                <strong>取車資訊：</strong><br>
+                                • 接駁車：紫色標示 "Rental Car Shuttles"<br>
+                                • 訂單編號：#12345678 (金卡會員直接看看板名字)<br>
+                                • 車型：SUV (Toyota RAV4 或類似)<br>
+                                • 檢查重點：輪胎紋路、外觀刮痕拍照、油箱全滿。
+                            </div>
+                        </details>
+                    </td>
+                </tr>
+
+                <!-- 03. 飯店 -->
+                <tr>
+                    <th class="editable">17:00</th>
+                    <td>
+                        <details>
+                            <summary class="editable">飯店 Check-in</summary>
+                            <div class="detail-content editable">
+                                <strong>Hilton Santa Monica</strong><br>
+                                離海邊走路 10 分鐘，附近很安全。<br>
+                                早餐時間：06:30 - 10:00 (憑房卡入場)
+                            </div>
+                        </details>
+                    </td>
+                </tr>
             </table>
+            
             <h3 class="editable">🏨 住宿資訊</h3>
             <div class="editable">
                 <strong>Hilton Santa Monica</strong><br>
@@ -99,49 +156,113 @@
         </div>
     </div>
 
-    <!-- [Day 2] -->
+    <!-- [Day 2] 包含詳細資訊 Demo -->
     <div id="day2" class="page">
         <div class="card">
             <h2 class="editable">Day 2: 洛杉磯藝文</h2>
             <table class="time-table">
-                <tr><th class="editable">09:30</th><td class="editable">前往蓋蒂中心 (The Getty)</td></tr>
-                <tr><th class="editable">12:30</th><td class="editable">午餐：館內景觀餐廳</td></tr>
+                
+                <!-- 01. 蓋蒂中心 -->
+                <tr>
+                    <th class="editable">09:30</th>
+                    <td>
+                        <details>
+                            <summary class="editable">蓋蒂中心 (The Getty)</summary>
+                            <div class="detail-content editable">
+                                <strong>必看亮點：</strong><br>
+                                • 梵谷《鳶尾花》 (西館 2 樓)<br>
+                                • 中央花園 (Central Garden)：四季都有不同花卉。<br>
+                                • 建築本身：由白色石灰岩打造，非常壯觀。<br>
+                                <em>備註：進門要先搭乘免費的小電車上山，風景很好。</em>
+                            </div>
+                        </details>
+                    </td>
+                </tr>
+                
+                <!-- 02. 聖塔莫尼卡 -->
+                <tr>
+                    <th class="editable">15:00</th>
+                    <td>
+                        <details>
+                            <summary class="editable">聖塔莫尼卡碼頭</summary>
+                            <div class="detail-content editable">
+                                <strong>遊玩攻略：</strong><br>
+                                • 66號公路終點牌：在碼頭入口處，必拍！<br>
+                                • 遊樂園：不用門票，玩設施才要付錢。<br>
+                                • 建議走到碼頭最尾端看海獅和釣魚的人。
+                            </div>
+                        </details>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
+
+    <!-- [Day 3] -->
+    <div id="day3" class="page">
+        <div class="card">
+            <h2 class="editable">Day 3: 好萊塢電影夢</h2>
+            <table class="time-table">
+                <tr>
+                    <th class="editable">10:00</th>
+                    <td>
+                        <details>
+                            <summary class="editable">格里斐斯天文台</summary>
+                            <div class="detail-content editable">
+                                <strong>電影場景：</strong><br>
+                                《樂來越愛你》(La La Land) 跳舞的地方。<br>
+                                往右邊走可以看到最近的 Hollywood 標誌視角。
+                            </div>
+                        </details>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 以下 Day 4 - Day 10 結構相同，您可以手動複製上面的 <details> 區塊來增加詳細資訊 -->
     
-    <!-- 為節省篇幅，其他天數結構同上，您可以在編輯模式下自行擴充內容 -->
-    
+    <!-- [Day 4] -->
+    <div id="day4" class="page"><div class="card"><h2 class="editable">Day 4: 往北出發</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day5" class="page"><div class="card"><h2 class="editable">Day 5: 丹麥村</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day6" class="page"><div class="card"><h2 class="editable">Day 6: 蒙特雷海岸</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day7" class="page"><div class="card"><h2 class="editable">Day 7: 前往舊金山</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day8" class="page"><div class="card"><h2 class="editable">Day 8: 舊金山地標</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day9" class="page"><div class="card"><h2 class="editable">Day 9: 海灣風情</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+    <div id="day10" class="page"><div class="card"><h2 class="editable">Day 10: 平安返家</h2><div class="editable">請點擊編輯按鈕來新增今日行程...</div></div></div>
+
 </div>
 
 <nav class="tab-bar">
     <div class="tab active" onclick="switchTab('home')">總覽</div>
     <div class="tab" onclick="switchTab('day1')">D1</div>
     <div class="tab" onclick="switchTab('day2')">D2</div>
+    <div class="tab" onclick="switchTab('day3')">D3</div>
+    <div class="tab" onclick="switchTab('day4')">D4</div>
+    <div class="tab" onclick="switchTab('day5')">D5</div>
+    <div class="tab" onclick="switchTab('day6')">D6</div>
+    <div class="tab" onclick="switchTab('day7')">D7</div>
+    <div class="tab" onclick="switchTab('day8')">D8</div>
+    <div class="tab" onclick="switchTab('day9')">D9</div>
+    <div class="tab" onclick="switchTab('day10')">D10</div>
 </nav>
 
 <script>
-    // 1. 初始化：檢查是否有儲存的內容
+    // 初始化
     window.onload = function() {
-        var savedContent = localStorage.getItem('trip_content');
-        if (savedContent) {
-            document.getElementById('mainContent').innerHTML = savedContent;
-        }
+        var saved = localStorage.getItem('trip_content_v2'); // 改個 key 避免跟舊版衝突
+        if (saved) document.getElementById('mainContent').innerHTML = saved;
     }
 
-    // 2. 切換 Tab
+    // 切換 Tab
     function switchTab(pageId) {
         document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-        var target = document.getElementById(pageId);
-        if(target) {
-            target.classList.add('active');
-            event.currentTarget.classList.add('active');
-            window.scrollTo(0, 0);
-        }
+        var t = document.getElementById(pageId);
+        if(t) { t.classList.add('active'); event.currentTarget.classList.add('active'); window.scrollTo(0, 0); }
     }
 
-    // 3. 編輯模式開關
+    // 編輯模式
     var isEditing = false;
     function toggleEditMode() {
         isEditing = !isEditing;
@@ -151,46 +272,41 @@
         var exportBtn = document.getElementById('exportBtn');
 
         if (isEditing) {
-            btn.innerHTML = '❌'; // 取消圖示
+            btn.innerHTML = '❌';
             saveBtn.style.display = 'flex';
             exportBtn.style.display = 'flex';
-            // 開啟所有可編輯區域
+            // 強制展開所有 details 以便編輯
+            document.querySelectorAll('details').forEach(el => el.setAttribute('open', 'true'));
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
-            alert('✏️ 編輯模式已開啟！\n請直接點擊文字修改。\n改完記得按綠色儲存鈕。');
+            alert('✏️ 編輯模式開啟！\n已自動展開所有詳細資訊以便修改。');
         } else {
             btn.innerHTML = '✏️';
             saveBtn.style.display = 'none';
             exportBtn.style.display = 'none';
-            // 關閉所有可編輯區域
             editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+            // 編輯結束後不自動收合，方便檢查
         }
     }
 
-    // 4. 儲存功能 (存到手機 LocalStorage)
+    // 儲存
     function saveContent() {
-        // 先把編輯狀態關掉，避免儲存到 contenteditable="true" 屬性
         var editables = document.querySelectorAll('.editable');
         editables.forEach(el => el.removeAttribute('contenteditable'));
+        // 移除所有 details 的 open 屬性，讓預設狀態為收合 (或保留看個人喜好)
+        // document.querySelectorAll('details').forEach(el => el.removeAttribute('open'));
         
         var content = document.getElementById('mainContent').innerHTML;
-        localStorage.setItem('trip_content', content);
-        
-        alert('✅ 儲存成功！\n即使關掉瀏覽器，下次打開還會是這些內容。');
-        toggleEditMode(); // 退出編輯模式
+        localStorage.setItem('trip_content_v2', content);
+        alert('✅ 儲存成功！');
+        toggleEditMode();
     }
 
-    // 5. 匯出功能 (將當前 HTML 複製到剪貼簿)
+    // 匯出
     function exportHtml() {
-        // 取得完整的 HTML
         var fullHtml = document.documentElement.outerHTML;
-        
-        // 複製到剪貼簿
         navigator.clipboard.writeText(fullHtml).then(function() {
-            alert('📋 完整程式碼已複製！\n您可以將其貼上到 GitHub 上更新。');
-        }, function(err) {
-            console.error('無法複製: ', err);
-            alert('複製失敗，請手動複製。');
-        });
+            alert('📋 完整原始碼已複製！');
+        }, function() { alert('複製失敗'); });
     }
 </script>
 
