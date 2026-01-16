@@ -3,84 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 美西孝親之旅 (完整版)</title>
+    <title>2026 美西孝親之旅</title>
     <style>
-        :root { --primary: #00897b; --bg: #f5f5f5; --card-bg: #ffffff; --text: #333; --danger: #e53935; --highlight: #e0f2f1; }
+        :root { 
+            --primary: #00897b; 
+            --bg: #f5f5f5; 
+            --card-bg: #ffffff; 
+            --text: #333; 
+            --danger: #e53935; 
+            --highlight: #e0f2f1; 
+            --base-font-size: 18px; /* 全域字體變數 */
+        }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; font-size: 18px; line-height: 1.6; }
-        header { background: var(--primary); color: white; padding: 15px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        h1 { margin: 0; font-size: 20px; } p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding-bottom: 80px; 
+            font-size: var(--base-font-size); /* 綁定變數 */
+            line-height: 1.6; 
+            transition: font-size 0.2s;
+        }
+        
+        /* 頂部導航列 */
+        header { 
+            background: var(--primary); 
+            color: white; 
+            padding: 15px 20px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 { margin: 0; font-size: 1.2rem; }
+        .header-left p { margin: 5px 0 0; font-size: 0.8rem; opacity: 0.9; }
+        
+        /* 全域字體調整按鈕 */
+        .global-font-ctrl { display: flex; gap: 5px; }
+        .g-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
         .container { padding: 15px; max-width: 800px; margin: 0 auto; }
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px; }
-        h3 { margin: 15px 0 10px; font-size: 18px; color: #444; font-weight: bold; }
+        h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.2rem; }
+        h3 { margin: 15px 0 10px; font-size: 1.1rem; color: #444; font-weight: bold; }
         
-        .time-table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 5px; }
-        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; vertical-align: top; font-weight: bold; padding: 5px 0; }
-        .time-table td { padding: 0 0 0 10px; vertical-align: top; }
+        .time-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; margin-top: 5px; }
+        .time-table th { color: var(--primary); white-space: nowrap; width: 70px; vertical-align: top; font-weight: bold; padding-top: 5px; }
+        .time-table td { padding-left: 10px; vertical-align: top; }
         
         details { width: 100%; }
-        summary { cursor: pointer; color: #0277bd; font-weight: 500; list-style: none; position: relative; padding: 5px 25px 5px 0; outline: none; }
+        summary { cursor: pointer; color: #0277bd; font-weight: 500; list-style: none; position: relative; padding: 5px 30px 5px 0; outline: none; }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; position: absolute; right: 0; top: 5px; color: #999; font-weight: bold; font-size: 1.2em; }
         details[open] summary::after { content: '-'; color: var(--primary); }
-        details[open] summary { color: var(--primary); font-weight: bold; border-bottom: 1px dashed #eee; margin-bottom: 5px; }
+        details[open] summary { color: var(--primary); font-weight: bold; border-bottom: 1px dashed #eee; margin-bottom: 8px; }
 
         .detail-content { 
             background: var(--highlight); 
             padding: 15px; 
             border-radius: 8px; 
-            font-size: 1rem; /* 預設字體大小 */
+            font-size: 0.95em; 
             color: #444;
-            line-height: 1.6;
-            position: relative; /* 用於定位字體按鈕 */
+            line-height: 1.7;
         }
         
-        /* 圖片容器 */
-        .img-container { margin-top: 10px; border-radius: 8px; overflow: hidden; background: #ddd; }
-        .img-container img { width: 100%; height: auto; display: block; object-fit: cover; }
-
-        /* 字體調整工具列 */
-        .font-controls {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 20px;
-            padding: 2px 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        .font-btn {
-            border: none;
-            background: none;
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            padding: 2px 5px;
-        }
+        .img-container { margin-top: 15px; border-radius: 8px; overflow: hidden; background: #ddd; min-height: 100px; display: flex; align-items: center; justify-content: center; color: #666; }
+        .img-container img { width: 100%; height: auto; display: block; }
 
         .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; background: #e3f2fd; border-left: 5px solid #2196f3; }
         .alert.danger { background: #ffebee; border-left-color: var(--danger); }
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 15px; margin-top: 10px; text-align: center; width: 100%; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 0.9em; margin-top: 10px; text-align: center; width: 100%; }
         
+        /* 底部 Tab */
         .tab-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; overflow-x: auto; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 0; }
         .tab { flex: 0 0 auto; padding: 8px 15px; text-align: center; color: #888; cursor: pointer; font-size: 14px; min-width: 60px; }
         .tab.active { color: var(--primary); font-weight: bold; border-bottom: 3px solid var(--primary); }
         .page { display: none; } .page.active { display: block; }
 
+        /* 編輯模式 */
         [contenteditable="true"] { border: 1px dashed #ccc; padding: 2px; min-height: 20px; background: #fffbe6; }
         .fab-container { position: fixed; bottom: 90px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
         .fab { width: 50px; height: 50px; border-radius: 25px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: none; font-size: 20px; cursor: pointer; }
         .fab.save { background: #4caf50; display: none; }
         .fab.export { background: #ff9800; display: none; }
+        
+        /* 新增行程按鈕 (僅編輯模式顯示) */
+        .add-trip-btn { display: none; width: 100%; padding: 10px; border: 2px dashed #ccc; background: #f9f9f9; color: #666; cursor: pointer; margin-top: 15px; border-radius: 8px; }
+        .add-trip-btn:hover { background: #eee; border-color: #999; }
     </style>
 </head>
 <body>
 
+<!-- 浮動按鈕 -->
 <div class="fab-container">
     <button class="fab" id="editBtn" onclick="toggleEditMode()">✏️</button>
     <button class="fab save" id="saveBtn" onclick="saveContent()">💾</button>
@@ -88,8 +114,15 @@
 </div>
 
 <header>
-    <h1 class="editable">2026 美西孝親之旅</h1>
-    <p class="editable">2/13 - 2/22 (共10天)</p>
+    <div class="header-left">
+        <h1 class="editable">2026 美西孝親之旅</h1>
+        <p class="editable">2/13 - 2/22 (共10天)</p>
+    </div>
+    <!-- 全域字體調整 -->
+    <div class="global-font-ctrl">
+        <button class="g-btn" onclick="changeGlobalFont(-2)">A-</button>
+        <button class="g-btn" onclick="changeGlobalFont(2)">A+</button>
+    </div>
 </header>
 
 <div class="container" id="mainContent">
@@ -117,50 +150,27 @@
                 <strong class="editable">💡 本日重點</strong>
                 <div class="editable">長途飛行辛苦了，今天目標只有順利取車，早點回飯店休息。</div>
             </div>
-            <table class="time-table">
+            
+            <table class="time-table" id="table-day1">
                 <tr><th class="editable">14:00</th><td>
                     <details>
                         <summary class="editable">抵達 LAX 機場</summary>
                         <div class="detail-content">
-                            <!-- 字體控制按鈕 (每個 details 都要有) -->
-                            <div class="font-controls">
-                                <button class="font-btn" onclick="adjustFont(this, -2)">A-</button>
-                                <button class="font-btn" onclick="adjustFont(this, 2)">A+</button>
-                            </div>
-                            <!-- 可編輯內容 -->
                             <div class="editable-content editable">
                                 • 航廈：Tom Bradley (TBIT)<br>
                                 • 入境：跟著 "Arrivals" 指標，全家一起過海關。<br>
-                                • 行李：轉盤 4 號領取。<br>
                                 • 接駁車：出大門找紫色 "Rental Car Shuttles" 站牌。
                             </div>
-                            <!-- 圖片區塊 -->
                             <div class="img-container">
-                                <!-- 預設圖片 (LAX) -->
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/LAX_Theme_Building.jpg/640px-LAX_Theme_Building.jpg" alt="LAX" class="editable-img">
-                                <div class="editable" style="font-size:12px; color:#666; text-align:center;">(點擊編輯替換圖片網址)</div>
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-                
-                <tr><th class="editable">15:30</th><td>
-                    <details>
-                        <summary class="editable">Hertz 取車</summary>
-                        <div class="detail-content">
-                            <div class="font-controls">
-                                <button class="font-btn" onclick="adjustFont(this, -2)">A-</button>
-                                <button class="font-btn" onclick="adjustFont(this, 2)">A+</button>
-                            </div>
-                            <div class="editable-content editable">
-                                • 訂單編號：#12345678<br>
-                                • 金卡會員：直接看電子看板上的名字與車位號碼。<br>
-                                • 檢查：輪胎紋路、外觀刮痕（記得拍照）。
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/LAX_Theme_Building.jpg/640px-LAX_Theme_Building.jpg" class="editable-img">
                             </div>
                         </div>
                     </details>
                 </td></tr>
             </table>
+            <!-- 自動新增按鈕 -->
+            <button class="add-trip-btn" onclick="addTripRow('table-day1')">➕ 新增一個行程</button>
+            
             <h3 class="editable">🏨 住宿資訊</h3>
             <div class="editable"><strong>Hilton Santa Monica</strong><br>地址：1707 4th St, Santa Monica</div>
             <a href="https://maps.google.com/?q=Hilton+Santa+Monica" class="btn editable-link">📍 開啟 Google 導航</a>
@@ -171,64 +181,54 @@
     <div id="day2" class="page">
         <div class="card">
             <h2 class="editable">Day 2: 洛杉磯藝文</h2>
-            <table class="time-table">
+            <table class="time-table" id="table-day2">
                 <tr><th class="editable">09:30</th><td>
                     <details>
-                        <summary class="editable">蓋蒂中心 (The Getty)</summary>
+                        <summary class="editable">蓋蒂中心</summary>
                         <div class="detail-content">
-                            <div class="font-controls">
-                                <button class="font-btn" onclick="adjustFont(this, -2)">A-</button>
-                                <button class="font-btn" onclick="adjustFont(this, 2)">A+</button>
-                            </div>
                             <div class="editable-content editable">
                                 • 特色：搭免費電車上山，白色建築超美。<br>
-                                • 必看：梵谷《鳶尾花》在西館。<br>
-                                • 提醒：山上風大，帶件薄外套。
+                                • 必看：梵谷《鳶尾花》在西館。
                             </div>
-                            <div class="img-container">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Getty_Center%2C_Los_Angeles%2C_California.jpg/640px-Getty_Center%2C_Los_Angeles%2C_California.jpg" alt="Getty Center" class="editable-img">
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">15:00</th><td>
-                    <details>
-                        <summary class="editable">聖塔莫尼卡碼頭</summary>
-                        <div class="detail-content">
-                             <div class="font-controls">
-                                <button class="font-btn" onclick="adjustFont(this, -2)">A-</button>
-                                <button class="font-btn" onclick="adjustFont(this, 2)">A+</button>
-                            </div>
-                            <div class="editable-content editable">
-                                • 必拍：66號公路終點牌。<br>
-                                • 散步：走到碼頭盡頭看人釣魚。
-                            </div>
-                            <div class="img-container">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Santa_Monica_Pier_Entrance.jpg/640px-Santa_Monica_Pier_Entrance.jpg" alt="Santa Monica" class="editable-img">
-                            </div>
+                            <div class="img-container"><div class="editable">(點擊換圖)</div></div>
                         </div>
                     </details>
                 </td></tr>
             </table>
+            <button class="add-trip-btn" onclick="addTripRow('table-day2')">➕ 新增一個行程</button>
         </div>
     </div>
-    
-    <!-- Day 3 ~ Day 10 結構相同，請依樣畫葫蘆或使用下方編輯功能新增 -->
-    <!-- 以下為節省篇幅，僅列出 Day 3 範例，您可手動複製 Day 2 的結構 -->
-    
+
+    <!-- [Day 3] -->
     <div id="day3" class="page">
         <div class="card">
-            <h2 class="editable">Day 3: 好萊塢電影夢</h2>
-            <div class="editable">請點擊編輯按鈕來新增今日行程...</div>
+            <h2 class="editable">Day 3: 好萊塢</h2>
+            <table class="time-table" id="table-day3">
+                <tr><th class="editable">10:00</th><td>
+                    <details>
+                        <summary class="editable">天文台</summary>
+                        <div class="detail-content"><div class="editable-content editable">詳細介紹...</div></div>
+                    </details>
+                </td></tr>
+            </table>
+            <button class="add-trip-btn" onclick="addTripRow('table-day3')">➕ 新增一個行程</button>
         </div>
     </div>
-    <div id="day4" class="page"><div class="card"><h2 class="editable">Day 4</h2><div class="editable">待補...</div></div></div>
-    <div id="day5" class="page"><div class="card"><h2 class="editable">Day 5</h2><div class="editable">待補...</div></div></div>
-    <div id="day6" class="page"><div class="card"><h2 class="editable">Day 6</h2><div class="editable">待補...</div></div></div>
-    <div id="day7" class="page"><div class="card"><h2 class="editable">Day 7</h2><div class="editable">待補...</div></div></div>
-    <div id="day8" class="page"><div class="card"><h2 class="editable">Day 8</h2><div class="editable">待補...</div></div></div>
-    <div id="day9" class="page"><div class="card"><h2 class="editable">Day 9</h2><div class="editable">待補...</div></div></div>
-    <div id="day10" class="page"><div class="card"><h2 class="editable">Day 10</h2><div class="editable">待補...</div></div></div>
+
+    <!-- Day 4 - 10 結構完整補齊 -->
+    <div id="day4" class="page"><div class="card"><h2 class="editable">Day 4: 往北出發</h2><table class="time-table" id="table-day4"></table><button class="add-trip-btn" onclick="addTripRow('table-day4')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day5" class="page"><div class="card"><h2 class="editable">Day 5: 丹麥村</h2><table class="time-table" id="table-day5"></table><button class="add-trip-btn" onclick="addTripRow('table-day5')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day6" class="page"><div class="card"><h2 class="editable">Day 6: 蒙特雷</h2><table class="time-table" id="table-day6"></table><button class="add-trip-btn" onclick="addTripRow('table-day6')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day7" class="page"><div class="card"><h2 class="editable">Day 7: 往舊金山</h2><table class="time-table" id="table-day7"></table><button class="add-trip-btn" onclick="addTripRow('table-day7')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day8" class="page"><div class="card"><h2 class="editable">Day 8: 舊金山地標</h2><table class="time-table" id="table-day8"></table><button class="add-trip-btn" onclick="addTripRow('table-day8')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day9" class="page"><div class="card"><h2 class="editable">Day 9: 海灣風情</h2><table class="time-table" id="table-day9"></table><button class="add-trip-btn" onclick="addTripRow('table-day9')">➕ 新增一個行程</button></div></div>
+    
+    <div id="day10" class="page"><div class="card"><h2 class="editable">Day 10: 返家</h2><table class="time-table" id="table-day10"></table><button class="add-trip-btn" onclick="addTripRow('table-day10')">➕ 新增一個行程</button></div></div>
 
 </div>
 
@@ -248,8 +248,11 @@
 
 <script>
     window.onload = function() {
-        var saved = localStorage.getItem('trip_content_v4');
+        var saved = localStorage.getItem('trip_content_v5');
         if (saved) document.getElementById('mainContent').innerHTML = saved;
+        // 恢復上次設定的字體大小
+        var savedSize = localStorage.getItem('trip_font_size');
+        if (savedSize) document.body.style.fontSize = savedSize + 'px';
     }
 
     function switchTab(pageId) {
@@ -258,18 +261,40 @@
         var t = document.getElementById(pageId);
         if(t) { t.classList.add('active'); event.currentTarget.classList.add('active'); window.scrollTo(0, 0); }
     }
-    
-    // 字體調整功能 (只針對該區塊)
-    function adjustFont(btn, delta) {
-        // 找到同層級的 content 區域
-        var parent = btn.closest('.detail-content');
-        var content = parent.querySelector('.editable-content');
-        var currentSize = window.getComputedStyle(content, null).getPropertyValue('font-size');
-        var newSize = parseFloat(currentSize) + delta;
-        // 限制最小最大值 (14px ~ 32px)
-        if(newSize >= 14 && newSize <= 32) {
-            content.style.fontSize = newSize + 'px';
+
+    // 全域字體調整
+    function changeGlobalFont(delta) {
+        var style = window.getComputedStyle(document.body, null).getPropertyValue('font-size');
+        var currentSize = parseFloat(style);
+        var newSize = currentSize + delta;
+        if(newSize >= 14 && newSize <= 30) {
+            document.body.style.fontSize = newSize + 'px';
+            localStorage.setItem('trip_font_size', newSize);
         }
+    }
+
+    // 自動新增行程功能
+    function addTripRow(tableId) {
+        var table = document.getElementById(tableId);
+        var row = table.insertRow(-1);
+        row.innerHTML = `
+            <th class="editable" contenteditable="true">時間</th>
+            <td>
+                <details open>
+                    <summary class="editable" contenteditable="true">新景點名稱 (點擊修改)</summary>
+                    <div class="detail-content">
+                        <div class="editable-content editable" contenteditable="true">
+                            請輸入詳細介紹...<br>特色、注意事項等。
+                        </div>
+                        <div class="img-container">
+                            <div class="editable" contenteditable="true">(點擊圖片區塊可換圖)</div>
+                        </div>
+                    </div>
+                </details>
+            </td>
+        `;
+        // 綁定換圖事件
+        bindImgClick();
     }
 
     var isEditing = false;
@@ -279,41 +304,60 @@
         var btn = document.getElementById('editBtn');
         var saveBtn = document.getElementById('saveBtn');
         var exportBtn = document.getElementById('exportBtn');
+        var addBtns = document.querySelectorAll('.add-trip-btn');
 
         if (isEditing) {
             btn.innerHTML = '❌';
             saveBtn.style.display = 'flex';
             exportBtn.style.display = 'flex';
+            addBtns.forEach(b => b.style.display = 'block'); // 顯示新增按鈕
+            
             document.querySelectorAll('details').forEach(el => el.setAttribute('open', 'true'));
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+            bindImgClick();
             
-            // 讓圖片也可以換網址
-            document.querySelectorAll('.editable-img').forEach(img => {
-                img.style.border = "2px solid red";
-                img.onclick = function() {
-                    var newSrc = prompt("請輸入新圖片網址:", img.src);
-                    if(newSrc) img.src = newSrc;
-                }
-            });
-            
-            alert('✏️ 編輯模式開啟！\n- 點文字修改內容\n- 點圖片可換照片');
+            alert('✏️ 編輯模式開啟！\n- 可直接修改文字\n- 點「➕」可新增行程\n- 點圖片可更換');
         } else {
             btn.innerHTML = '✏️';
             saveBtn.style.display = 'none';
             exportBtn.style.display = 'none';
+            addBtns.forEach(b => b.style.display = 'none'); // 隱藏新增按鈕
+            
             editables.forEach(el => el.setAttribute('contenteditable', 'false'));
-            document.querySelectorAll('.editable-img').forEach(img => {
-                img.style.border = "none";
-                img.onclick = null;
-            });
+            unbindImgClick();
         }
+    }
+
+    function bindImgClick() {
+        document.querySelectorAll('.img-container, .editable-img').forEach(div => {
+            div.style.border = "2px dashed #f00";
+            div.style.cursor = "pointer";
+            div.onclick = function(e) {
+                // 避免觸發 summary 的點擊
+                e.preventDefault();
+                e.stopPropagation();
+                var newSrc = prompt("請輸入新圖片網址:", "");
+                if(newSrc) {
+                    // 如果原本只有文字div，換成img標籤
+                    this.innerHTML = '<img src="' + newSrc + '" class="editable-img">';
+                }
+            }
+        });
+    }
+
+    function unbindImgClick() {
+        document.querySelectorAll('.img-container, .editable-img').forEach(div => {
+            div.style.border = "none";
+            div.style.cursor = "default";
+            div.onclick = null;
+        });
     }
 
     function saveContent() {
         var editables = document.querySelectorAll('.editable');
         editables.forEach(el => el.removeAttribute('contenteditable'));
         var content = document.getElementById('mainContent').innerHTML;
-        localStorage.setItem('trip_content_v4', content);
+        localStorage.setItem('trip_content_v5', content);
         alert('✅ 儲存成功！');
         toggleEditMode();
     }
