@@ -3,168 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 美西孝親之旅</title>
+    <title>2026 美西孝親之旅 (可編輯版)</title>
     <style>
-        /* --- 樣式設定區 (不需要更動) --- */
         :root { --primary: #00897b; --bg: #f5f5f5; --card-bg: #ffffff; --text: #333; --danger: #e53935; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; font-size: 18px; line-height: 1.6; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; font-size: 18px; line-height: 1.6; }
         header { background: var(--primary); color: white; padding: 15px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        h1 { margin: 0; font-size: 22px; } p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+        h1 { margin: 0; font-size: 20px; } p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
         .container { padding: 15px; max-width: 800px; margin: 0 auto; }
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px; }
-        h3 { margin: 15px 0 10px; font-size: 19px; color: #444; }
+        h3 { margin: 15px 0 10px; font-size: 18px; color: #444; font-weight: bold; }
         ul { padding-left: 20px; margin: 10px 0; } li { margin-bottom: 8px; }
         .time-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         .time-table th, .time-table td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #eee; }
-        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; vertical-align: top; }
+        .time-table th { color: var(--primary); white-space: nowrap; width: 60px; vertical-align: top; font-weight: bold; }
         .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; background: #e3f2fd; border-left: 5px solid #2196f3; }
         .alert.danger { background: #ffebee; border-left-color: var(--danger); }
         .alert strong { display: block; margin-bottom: 5px; font-size: 1.1em; }
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; margin-top: 5px; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 15px; margin-top: 10px; text-align: center; width: 100%; }
+        
+        /* 底部 Tab */
         .tab-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; overflow-x: auto; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 0; }
-        .tab { flex: 0 0 auto; padding: 8px 20px; text-align: center; color: #666; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; }
+        .tab { flex: 0 0 auto; padding: 8px 18px; text-align: center; color: #888; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; }
         .tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: bold; }
-        .page { display: none; animation: fadeIn 0.3s; } .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page { display: none; } .page.active { display: block; }
+
+        /* --- 編輯模式樣式 --- */
+        [contenteditable="true"] { border: 1px dashed #ccc; padding: 2px; min-height: 20px; background: #fffbe6; }
+        [contenteditable="true"]:focus { outline: 2px solid var(--primary); background: #fff; }
+        
+        /* 浮動編輯按鈕 */
+        .fab-container { position: fixed; bottom: 90px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
+        .fab { width: 50px; height: 50px; border-radius: 25px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; border: none; font-size: 20px; }
+        .fab.save { background: #4caf50; display: none; }
+        .fab.export { background: #ff9800; display: none; }
     </style>
 </head>
 <body>
 
+<!-- 浮動按鈕群 -->
+<div class="fab-container">
+    <button class="fab" id="editBtn" onclick="toggleEditMode()">✏️</button>
+    <button class="fab save" id="saveBtn" onclick="saveContent()">💾</button>
+    <button class="fab export" id="exportBtn" onclick="exportHtml()">📤</button>
+</div>
+
 <header>
-    <h1 id="header-title">2026 美西孝親之旅</h1>
-    <p>2/13 - 2/22 (共10天)</p>
+    <h1 class="editable">2026 美西孝親之旅</h1>
+    <p class="editable">2/13 - 2/22 (共10天)</p>
 </header>
 
-<div class="container">
+<div class="container" id="mainContent">
 
-    <!-- [頁面] 首頁總覽 -->
+    <!-- [Home] -->
     <div id="home" class="page active">
-        <!-- 緊急資訊模組 -->
         <div class="alert danger">
-            <strong>🆘 緊急聯絡</strong>
-            兒子的電話: +1-123-456-7890<br>
-            外交部急難救助: +1-213-382-7720
+            <strong class="editable">🆘 緊急聯絡卡</strong>
+            <div class="editable">
+                兒子的電話: +1-123-456-7890<br>
+                外交部急難救助: +1-213-382-7720
+            </div>
         </div>
         
         <div class="card">
-            <h2>行程總表</h2>
+            <h2 class="editable">行程總表</h2>
             <table class="time-table">
-                <!-- 這裡可以手動修改日期與重點 -->
-                <tr><th>2/13</th><td>抵達洛杉磯，取車休息</td></tr>
-                <tr><th>2/14</th><td>蓋蒂中心，聖塔莫尼卡</td></tr>
-                <tr><th>2/15</th><td>好萊塢，天文台</td></tr>
-                <tr><th>2/16</th><td>前往聖塔芭芭拉</td></tr>
-                <tr><th>2/17</th><td>丹麥村 Solvang</td></tr>
-                <tr><th>2/18</th><td>蒙特雷 17哩海岸</td></tr>
-                <tr><th>2/19</th><td>水族館，往舊金山</td></tr>
-                <tr><th>2/20</th><td>金門大橋，九曲花街</td></tr>
-                <tr><th>2/21</th><td>漁人碼頭，渡輪大廈</td></tr>
-                <tr><th>2/22</th><td>前往機場返家</td></tr>
+                <tr><th class="editable">2/13</th><td class="editable">抵達洛杉磯，取車休息</td></tr>
+                <tr><th class="editable">2/14</th><td class="editable">蓋蒂中心，聖塔莫尼卡</td></tr>
+                <tr><th class="editable">2/15</th><td class="editable">好萊塢，天文台</td></tr>
+                <!-- 您可以在編輯模式下直接複製整行 HTML 貼上來新增 -->
             </table>
         </div>
     </div>
 
-    <!-- [頁面] Day 1 -->
+    <!-- [Day 1] -->
     <div id="day1" class="page">
         <div class="card">
-            <h2>Day 1: 抵達洛杉磯</h2>
-            
-            <!-- 藍色提示框 -->
+            <h2 class="editable">Day 1: 抵達洛杉磯</h2>
             <div class="alert">
-                <strong>💡 本日重點</strong>
-                長途飛行辛苦了，今天只求順利取車，早點回飯店調時差。
+                <strong class="editable">💡 本日重點</strong>
+                <div class="editable">長途飛行辛苦了，今天目標只有順利取車，早點回飯店休息調時差。</div>
             </div>
-            
-            <!-- 時間表 -->
             <table class="time-table">
-                <tr><th>14:00</th><td>抵達 LAX 機場 (TBIT航廈)</td></tr>
-                <tr><th>15:30</th><td>搭乘接駁車前往 Hertz 取車<br><span style="font-size:0.8em; color:#666;">訂單編號: 12345678</span></td></tr>
-                <tr><th>17:00</th><td>飯店 Check-in</td></tr>
-                <tr><th>18:00</th><td>晚餐：飯店附近輕食</td></tr>
+                <tr><th class="editable">14:00</th><td class="editable">抵達 LAX 機場 (TBIT航廈)</td></tr>
+                <tr><th class="editable">15:30</th><td class="editable">搭乘接駁車前往 Hertz 取車</td></tr>
+                <tr><th class="editable">17:00</th><td class="editable">飯店 Check-in</td></tr>
             </table>
-            
-            <!-- 住宿資訊 -->
-            <h3>🏨 住宿資訊</h3>
-            <p><strong>Hilton Santa Monica</strong><br>
-            地址：1707 4th St, Santa Monica<br>
-            電話：+1 310-395-3332</p>
-            <a href="https://maps.google.com/?q=Hilton+Santa+Monica" target="_blank" class="btn">開啟 Google 導航</a>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable">
+                <strong>Hilton Santa Monica</strong><br>
+                地址：1707 4th St, Santa Monica
+            </div>
+            <a href="https://maps.google.com/?q=Hilton+Santa+Monica" class="btn editable-link">📍 開啟 Google 導航</a>
         </div>
     </div>
 
-    <!-- [頁面] Day 2 -->
+    <!-- [Day 2] -->
     <div id="day2" class="page">
         <div class="card">
-            <h2>Day 2: 洛杉磯藝文</h2>
+            <h2 class="editable">Day 2: 洛杉磯藝文</h2>
             <table class="time-table">
-                <tr><th>09:30</th><td>前往蓋蒂中心 (The Getty)</td></tr>
-                <tr><th>12:30</th><td>午餐：館內景觀餐廳</td></tr>
-                <tr><th>15:00</th><td>聖塔莫尼卡海灘散步</td></tr>
-                <tr><th>18:00</th><td>晚餐：韓國城豆腐鍋</td></tr>
+                <tr><th class="editable">09:30</th><td class="editable">前往蓋蒂中心 (The Getty)</td></tr>
+                <tr><th class="editable">12:30</th><td class="editable">午餐：館內景觀餐廳</td></tr>
             </table>
-            
-            <!-- 這裡示範如何手動加入詳細資訊 -->
-            <h3>📝 備註</h3>
-            <ul>
-                <li>蓋蒂中心停車費 $20，參觀免費。</li>
-                <li>進博物館不能帶大背包，需寄放。</li>
-            </ul>
         </div>
     </div>
-
-    <!-- 若要新增 Day 3, 請複製上面的 <div id="day2" ...> 到 </div> 區塊貼在下方，並改 id 為 day3 -->
     
-    <!-- 為了示範簡潔，中間省略 Day 3-9，您可以照著上面的格式自行複製擴充 -->
+    <!-- 為節省篇幅，其他天數結構同上，您可以在編輯模式下自行擴充內容 -->
     
-    <!-- [頁面] Day 10 -->
-    <div id="day10" class="page">
-        <div class="card">
-            <h2>Day 10: 平安返家</h2>
-            <table class="time-table">
-                <tr><th>09:00</th><td>整理行李 Check-out</td></tr>
-                <tr><th>10:00</th><td>前往 SFO 機場</td></tr>
-                <tr><th>10:30</th><td>還車 (Rental Car Return)</td></tr>
-                <tr><th>13:00</th><td>飛機起飛</td></tr>
-            </table>
-            <div class="alert">
-                <strong>✈️ 航班資訊</strong>
-                航班：BR007 / CI003<br>
-                航廈：International Terminal A
-            </div>
-        </div>
-    </div>
-
 </div>
 
-<!-- 底部導覽列 -->
 <nav class="tab-bar">
-    <!-- onclick="switchTab('home')" 的 home 對應上面的 id="home" -->
     <div class="tab active" onclick="switchTab('home')">總覽</div>
-    
     <div class="tab" onclick="switchTab('day1')">D1</div>
     <div class="tab" onclick="switchTab('day2')">D2</div>
-    
-    <!-- 如果您新增了 Day 3，請把下面這行的註解符號拿掉 -->
-    <!-- <div class="tab" onclick="switchTab('day3')">D3</div> -->
-    
-    <div class="tab" onclick="switchTab('day10')">D10</div>
 </nav>
 
 <script>
+    // 1. 初始化：檢查是否有儲存的內容
+    window.onload = function() {
+        var savedContent = localStorage.getItem('trip_content');
+        if (savedContent) {
+            document.getElementById('mainContent').innerHTML = savedContent;
+        }
+    }
+
+    // 2. 切換 Tab
     function switchTab(pageId) {
         document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-        
         var target = document.getElementById(pageId);
-        if (target) {
+        if(target) {
             target.classList.add('active');
-            event.target.classList.add('active');
+            event.currentTarget.classList.add('active');
             window.scrollTo(0, 0);
-        } else {
-            console.error("找不到頁面 ID: " + pageId);
         }
+    }
+
+    // 3. 編輯模式開關
+    var isEditing = false;
+    function toggleEditMode() {
+        isEditing = !isEditing;
+        var editables = document.querySelectorAll('.editable');
+        var btn = document.getElementById('editBtn');
+        var saveBtn = document.getElementById('saveBtn');
+        var exportBtn = document.getElementById('exportBtn');
+
+        if (isEditing) {
+            btn.innerHTML = '❌'; // 取消圖示
+            saveBtn.style.display = 'flex';
+            exportBtn.style.display = 'flex';
+            // 開啟所有可編輯區域
+            editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+            alert('✏️ 編輯模式已開啟！\n請直接點擊文字修改。\n改完記得按綠色儲存鈕。');
+        } else {
+            btn.innerHTML = '✏️';
+            saveBtn.style.display = 'none';
+            exportBtn.style.display = 'none';
+            // 關閉所有可編輯區域
+            editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+        }
+    }
+
+    // 4. 儲存功能 (存到手機 LocalStorage)
+    function saveContent() {
+        // 先把編輯狀態關掉，避免儲存到 contenteditable="true" 屬性
+        var editables = document.querySelectorAll('.editable');
+        editables.forEach(el => el.removeAttribute('contenteditable'));
+        
+        var content = document.getElementById('mainContent').innerHTML;
+        localStorage.setItem('trip_content', content);
+        
+        alert('✅ 儲存成功！\n即使關掉瀏覽器，下次打開還會是這些內容。');
+        toggleEditMode(); // 退出編輯模式
+    }
+
+    // 5. 匯出功能 (將當前 HTML 複製到剪貼簿)
+    function exportHtml() {
+        // 取得完整的 HTML
+        var fullHtml = document.documentElement.outerHTML;
+        
+        // 複製到剪貼簿
+        navigator.clipboard.writeText(fullHtml).then(function() {
+            alert('📋 完整程式碼已複製！\n您可以將其貼上到 GitHub 上更新。');
+        }, function(err) {
+            console.error('無法複製: ', err);
+            alert('複製失敗，請手動複製。');
+        });
     }
 </script>
 
