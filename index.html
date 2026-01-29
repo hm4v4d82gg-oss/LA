@@ -110,7 +110,7 @@
 <header>
     <div class="header-left">
         <h1 class="editable">2026 美西孝親之旅</h1>
-        <p class="editable">2/13 - 2/22 (大圓環特別版)</p>
+        <p class="editable">2/13 - 2/22 (依新行程表)</p>
     </div>
     <div class="global-font-ctrl">
         <button class="g-btn" onclick="changeGlobalFont(-2)">A-</button>
@@ -130,113 +130,83 @@
             </div>
         </div>
         <div class="card">
-            <h2 class="editable">行程總表</h2>
-            <p class="editable">2/14 開始進入大圓環 (Grand Circle) 區域，天氣較冷請注意保暖。</p>
+            <h2 class="editable">行程總覽</h2>
+            <p class="editable">2.18-2.21 行程視天氣與路況彈性調整，若山區路況不佳可改走一號公路。</p>
         </div>
     </div>
 
-    <!-- [Day 1] -->
+    <!-- [Day 1] 2.13 洛杉磯 -->
     <div id="day1" class="page">
         <div class="card">
-            <h2 class="editable">Day 1: 抵達洛杉磯 (2/13)</h2>
+            <h2 class="editable">Day 1: 抵達洛杉磯 (2.13)</h2>
             <div class="alert">
                 <strong class="editable">💡 本日重點</strong>
-                <div class="editable">長途飛行，今日目標僅為取車與休息，為明天的長途駕駛養足精神。</div>
+                <div class="editable">接機後市區觀光，調整時差。</div>
             </div>
             <table class="time-table" id="table-day1">
                 <tr><th class="editable">14:00</th><td>
                     <details>
-                        <summary class="editable">抵達 LAX 機場</summary>
+                        <summary class="editable">接機 & 市區遊</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                • 航廈：Tom Bradley (TBIT)<br>
-                                • 接駁車：出大門找紫色 "Rental Car Shuttles" 站牌。
+                                洛杉磯接機後，依照體力挑選市區經典景點遊玩。<br>
+                                結束後入住飯店休息，調整時差。
                             </div>
                             <div class="img-container"><div class="editable">(點擊換圖)</div></div>
                         </div>
                     </details>
                 </td></tr>
-                <tr><th class="editable">17:00</th><td>
-                    <details>
-                        <summary class="editable">入住飯店休息</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                建議早點休息，明天要開長途車往沙漠區。
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
             </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>洛杉磯市區飯店</strong></div>
             <button class="add-trip-btn" onclick="addTripRow('table-day1')">➕ 新增行程</button>
         </div>
     </div>
 
-    <!-- [Day 2] 2/14 洛杉磯 -> 約書亞 -> 拉斯維加斯 -->
+    <!-- [Day 2] 2.14 洛杉磯 -> 拉斯維加斯 -->
     <div id="day2" class="page">
         <div class="card">
-            <h2 class="editable">Day 2: 前進荒野 (2/14)</h2>
+            <h2 class="editable">Day 2: 賭城之旅 (2.14)</h2>
             <div class="alert">
-                <strong class="editable">🚗 長途駕駛日</strong>
-                <div class="editable">今日車程約 5-6 小時。沙漠區溫差大。</div>
+                <strong class="editable">🚗 車程約 4.5 小時</strong>
             </div>
             <table class="time-table" id="table-day2">
                 <tr><th class="editable">09:00</th><td>
                     <details>
-                        <summary class="editable">出發前往約書亞樹</summary>
+                        <summary class="editable">出發前往拉斯維加斯</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                車程約 2.5 小時。<br>
-                                導航設定：Joshua Tree National Park West Entrance。
+                                早上出發，沿途經過七彩石 (Seven Magic Mountains) 打卡。
                             </div>
                         </div>
                     </details>
                 </td></tr>
-                <tr><th class="editable">12:00</th><td>
+                <tr><th class="editable">14:00</th><td>
                     <details>
-                        <summary class="editable">約書亞樹國家公園</summary>
+                        <summary class="editable">抵達與市區觀光</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                • 必看：奇形怪狀的約書亞樹、巨石陣。<br>
-                                • 景點：Hidden Valley (步道簡單)、Keys View (看風景)。<br>
-                                • 午餐：建議在進入公園前買好三明治在車上吃。
+                                挑選市區景點打卡，建議集中在拉斯維加斯大道 (The Strip)，步行體驗更好。<br>
+                                晚上可安排 Sphere 或欣賞夜景。
                             </div>
-                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Joshua_Tree_National_Park_2013.jpg/640px-Joshua_Tree_National_Park_2013.jpg" class="editable-img"></div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">15:00</th><td>
-                    <details>
-                        <summary class="editable">前往拉斯維加斯</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                車程約 3.5 小時。<br>
-                                走沙漠公路，中途訊號可能不佳，建議下載離線地圖。
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">19:00</th><td>
-                    <details>
-                        <summary class="editable">抵達 Las Vegas</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                晚上可逛逛賭城大道 (The Strip) 看水舞秀 (Bellagio Fountains)。
-                            </div>
+                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Las_Vegas_Strip_at_night_2022.jpg/640px-Las_Vegas_Strip_at_night_2022.jpg" class="editable-img"></div>
                         </div>
                     </details>
                 </td></tr>
             </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>拉斯維加斯飯店</strong></div>
             <button class="add-trip-btn" onclick="addTripRow('table-day2')">➕ 新增行程</button>
         </div>
     </div>
 
-    <!-- [Day 3] 2/15 拉斯維加斯 -> 錫安 -> 布萊斯 -->
+    <!-- [Day 3] 2.15 拉斯維加斯 -> 錫安 -> 布萊斯 -->
     <div id="day3" class="page">
         <div class="card">
-            <h2 class="editable">Day 3: 巨石與峽谷 (2/15)</h2>
+            <h2 class="editable">Day 3: 雙峽谷 (2.15)</h2>
             <div class="alert danger">
                 <strong class="editable">⏰ 時差提醒</strong>
-                <div class="editable">進入猶他州時間會**快 1 小時** (Vegas 8點 = 猶他 9點)。請注意時間控制！</div>
+                <div class="editable">猶他州時間快 1 小時。</div>
             </div>
             <table class="time-table" id="table-day3">
                 <tr><th class="editable">08:00</th><td>
@@ -244,153 +214,250 @@
                         <summary class="editable">前往錫安國家公園</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                車程約 2.5 小時 (+1小時時差)。<br>
-                                沿途會經過壯觀的 Virgin River Gorge 峽谷公路。
+                                早上出發，車程約 2.5 小時到達錫安國家公園 (Zion)。
                             </div>
                         </div>
                     </details>
                 </td></tr>
                 <tr><th class="editable">12:00</th><td>
                     <details>
-                        <summary class="editable">錫安國家公園 (Zion)</summary>
+                        <summary class="editable">前往布萊斯峽谷</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                • 景點：Canyon Junction Bridge (拍經典山景)。<br>
-                                • 穿越隧道：Zion-Mt. Carmel Tunnel (非常壯觀)。<br>
-                                • 提醒：冬天私家車可以直接開進峽谷，不用搭接駁車。
-                            </div>
-                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Zion_angels_landing_view.jpg/640px-Zion_angels_landing_view.jpg" class="editable-img"></div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">16:00</th><td>
-                    <details>
-                        <summary class="editable">抵達布萊斯峽谷</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                車程約 1.5 小時。<br>
-                                <strong>⚠️注意：</strong> 這裡海拔很高，晚上非常冷 (可能 -10°C)，路面可能有冰。
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-            </table>
-            <button class="add-trip-btn" onclick="addTripRow('table-day3')">➕ 新增行程</button>
-        </div>
-    </div>
-
-    <!-- [Day 4] 2/16 布萊斯 -> 羚羊谷 -> 馬蹄灣 -> 佩吉 -->
-    <div id="day4" class="page">
-        <div class="card">
-            <h2 class="editable">Day 4: 光影魔術 (2/16)</h2>
-            <table class="time-table" id="table-day4">
-                <tr><th class="editable">08:30</th><td>
-                    <details>
-                        <summary class="editable">布萊斯峽谷日出</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                • 景點：Sunset Point 或 Sunrise Point。<br>
-                                • 特色：看紅色的石柱群 (Hoodoos) 被白雪覆蓋的絕景。<br>
-                                • 提醒：非常冷，手套帽子必備。
+                                錫安遊玩後，車程約 1 小時到達布萊斯峽谷 (Bryce Canyon)。<br>
+                                視情況遊玩或直接入住。
                             </div>
                             <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Bryce_Canyon_Amphitheater_Hoodoos.jpg/640px-Bryce_Canyon_Amphitheater_Hoodoos.jpg" class="editable-img"></div>
                         </div>
                     </details>
                 </td></tr>
-                <tr><th class="editable">10:30</th><td>
-                    <details>
-                        <summary class="editable">前往 Page (羚羊谷)</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                車程約 2.5 小時。<br>
-                                這裡會切回亞利桑那州時間 (-1小時)，時間會變多！
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">13:30</th><td>
-                    <details>
-                        <summary class="editable">下羚羊谷 (需預約)</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                • 導覽：必須參加導覽團 (約 1-1.5 小時)。<br>
-                                • 規定：不能帶包包，只能帶手機/相機和水。<br>
-                                • 景色：冬天光線較柔和，雖然沒有光束但岩壁顏色很美。
-                            </div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">15:30</th><td>
-                    <details>
-                        <summary class="editable">馬蹄灣 (Horseshoe Bend)</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                • 停車費：$10 (只收信用卡)。<br>
-                                • 步行：從停車場走約 15 分鐘平路到懸崖邊。<br>
-                                • 拍照：懸崖沒有護欄，長輩拍照請注意安全。
-                            </div>
-                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Horseshoe_Bend%2C_Arizona_2022.jpg/640px-Horseshoe_Bend%2C_Arizona_2022.jpg" class="editable-img"></div>
-                        </div>
-                    </details>
-                </td></tr>
             </table>
             <h3 class="editable">🏨 住宿資訊</h3>
-            <div class="editable"><strong>Page, AZ</strong> (建議住 Hyatt Place 或 Holiday Inn Express)</div>
-            <button class="add-trip-btn" onclick="addTripRow('table-day4')">➕ 新增行程</button>
+            <div class="editable"><strong>布萊斯峽谷城 (Bryce Canyon City)</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day3')">➕ 新增行程</button>
         </div>
     </div>
-    
-    <!-- [Day 5] 2/17 佩吉 -> 大峽谷 -> 拉斯維加斯 -->
-    <div id="day5" class="page">
+
+    <!-- [Day 4] 2.16 布萊斯 -> 佩吉 (羚羊谷) -->
+    <div id="day4" class="page">
         <div class="card">
-            <h2 class="editable">Day 5: 壯麗終章 (2/17)</h2>
-            <table class="time-table" id="table-day5">
-                <tr><th class="editable">09:00</th><td>
+            <h2 class="editable">Day 4: 羚羊谷 (2.16)</h2>
+            <table class="time-table" id="table-day4">
+                <tr><th class="editable">08:30</th><td>
                     <details>
-                        <summary class="editable">前往大峽谷南緣</summary>
+                        <summary class="editable">前往佩吉 (Page)</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                車程約 2.5 小時。<br>
-                                從東入口 (Desert View) 進入，這條路風景最美。
+                                視昨天情況，可先遊玩布萊斯後出發。<br>
+                                車程約 3 小時到達佩吉。
                             </div>
-                        </div>
-                    </details>
-                </td></tr>
-                <tr><th class="editable">11:30</th><td>
-                    <details>
-                        <summary class="editable">大峽谷國家公園</summary>
-                        <div class="detail-content">
-                            <div class="editable-content editable">
-                                • 第一站：Desert View Watchtower (古塔，可登高)。<br>
-                                • 主景點：Mather Point (遊客中心旁，最經典視角)。<br>
-                                • 步道：Yavapai Geology Museum (室內看大峽谷，不怕風吹)。
-                            </div>
-                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Grand_Canyon_South_Rim.jpg/640px-Grand_Canyon_South_Rim.jpg" class="editable-img"></div>
                         </div>
                     </details>
                 </td></tr>
                 <tr><th class="editable">15:00</th><td>
                     <details>
+                        <summary class="editable">羚羊谷 & 馬蹄灣</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                <strong>重點：</strong>購買下午 3 點左右的羚羊谷門票。<br>
+                                結束後遊玩馬蹄灣等景點。
+                            </div>
+                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lower_Antelope_Canyon_4.jpg/640px-Lower_Antelope_Canyon_4.jpg" class="editable-img"></div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>佩吉 (Page)</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day4')">➕ 新增行程</button>
+        </div>
+    </div>
+    
+    <!-- [Day 5] 2.17 佩吉 -> 大峽谷 -> 拉斯維加斯 -->
+    <div id="day5" class="page">
+        <div class="card">
+            <h2 class="editable">Day 5: 大峽谷 (2.17)</h2>
+            <table class="time-table" id="table-day5">
+                <tr><th class="editable">09:00</th><td>
+                    <details>
+                        <summary class="editable">大峽谷 (東峽)</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                早上出發，車程約 2 小時到達大峽谷。<br>
+                                沿著「東峽」路線遊玩。
+                            </div>
+                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Grand_Canyon_South_Rim.jpg/640px-Grand_Canyon_South_Rim.jpg" class="editable-img"></div>
+                        </div>
+                    </details>
+                </td></tr>
+                <tr><th class="editable">14:00</th><td>
+                    <details>
                         <summary class="editable">返回拉斯維加斯</summary>
                         <div class="detail-content">
                             <div class="editable-content editable">
-                                車程約 4.5 小時。<br>
-                                中途可在 Kingman 或 Hoover Dam (胡佛水壩) 稍作休息。
+                                遊玩結束後，車程約 4.5 小時返回拉斯維加斯。<br>
+                                晚上自由活動，可選看秀或夜景。
                             </div>
                         </div>
                     </details>
                 </td></tr>
             </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>拉斯維加斯飯店</strong></div>
             <button class="add-trip-btn" onclick="addTripRow('table-day5')">➕ 新增行程</button>
         </div>
     </div>
     
-    <!-- Day 6 - 10 預留 -->
-    <div id="day6" class="page"><div class="card"><h2 class="editable">Day 6: 拉斯維加斯休整</h2><table class="time-table" id="table-day6"></table><button class="add-trip-btn" onclick="addTripRow('table-day6')">➕ 新增行程</button></div></div>
-    <div id="day7" class="page"><div class="card"><h2 class="editable">Day 7: 回洛杉磯/其他</h2><table class="time-table" id="table-day7"></table><button class="add-trip-btn" onclick="addTripRow('table-day7')">➕ 新增行程</button></div></div>
-    <div id="day8" class="page"><div class="card"><h2 class="editable">Day 8: 預留日</h2><table class="time-table" id="table-day8"></table><button class="add-trip-btn" onclick="addTripRow('table-day8')">➕ 新增行程</button></div></div>
-    <div id="day9" class="page"><div class="card"><h2 class="editable">Day 9: 購物/市區</h2><table class="time-table" id="table-day9"></table><button class="add-trip-btn" onclick="addTripRow('table-day9')">➕ 新增行程</button></div></div>
-    <div id="day10" class="page"><div class="card"><h2 class="editable">Day 10: 返程</h2><table class="time-table" id="table-day10"></table><button class="add-trip-btn" onclick="addTripRow('table-day10')">➕ 新增行程</button></div></div>
+    <!-- [Day 6] 2.18 拉斯維加斯 -> 紅杉國家公園南門 -->
+    <div id="day6" class="page">
+        <div class="card">
+            <h2 class="editable">Day 6: 移動日 (2.18)</h2>
+            <table class="time-table" id="table-day6">
+                <tr><th class="editable">上午</th><td>
+                    <details>
+                        <summary class="editable">市區/奧萊</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                早上遊玩拉斯維加斯市區或去 Outlets 購物。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+                <tr><th class="editable">下午</th><td>
+                    <details>
+                        <summary class="editable">前往紅杉南門</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                行程結束後，開車約 5 小時到達紅杉國家公園南門附近住宿。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>沿途住宿 (如 Bakersfield 或 Visalia)</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day6')">➕ 新增行程</button>
+        </div>
+    </div>
+    
+    <!-- [Day 7] 2.19 紅杉 -> 優勝美地南門 -->
+    <div id="day7" class="page">
+        <div class="card">
+            <h2 class="editable">Day 7: 紅杉巨木 (2.19)</h2>
+            <table class="time-table" id="table-day7">
+                <tr><th class="editable">早上</th><td>
+                    <details>
+                        <summary class="editable">紅杉國家公園</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                早上出發，約 1 小時進入國家公園遊玩。<br>
+                                結束後視路況從南門或北門出。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+                <tr><th class="editable">下午</th><td>
+                    <details>
+                        <summary class="editable">前往優勝美地</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                車程約 3 小時到達優勝美地南門。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>優勝美地南門 (Oakhurst)</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day7')">➕ 新增行程</button>
+        </div>
+    </div>
+    
+    <!-- [Day 8] 2.20 優勝美地 -->
+    <div id="day8" class="page">
+        <div class="card">
+            <h2 class="editable">Day 8: 優勝美地 (2.20)</h2>
+            <table class="time-table" id="table-day8">
+                <tr><th class="editable">09:00</th><td>
+                    <details>
+                        <summary class="editable">優勝美地一日遊</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                早上出發，約 1 小時進入優勝美地 (Yosemite) 遊玩。<br>
+                                參觀優勝美地山谷 (Valley)、瀑布等。
+                            </div>
+                            <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/640px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg" class="editable-img"></div>
+                        </div>
+                    </details>
+                </td></tr>
+                <tr><th class="editable">下午</th><td>
+                    <details>
+                        <summary class="editable">出谷休息</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                下午出谷，返回同一住宿地點。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>優勝美地南門 (續住)</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day8')">➕ 新增行程</button>
+        </div>
+    </div>
+    
+    <!-- [Day 9] 2.21 優勝美地 -> 舊金山 -->
+    <div id="day9" class="page">
+        <div class="card">
+            <h2 class="editable">Day 9: 往舊金山 (2.21)</h2>
+            <table class="time-table" id="table-day9">
+                <tr><th class="editable">09:00</th><td>
+                    <details>
+                        <summary class="editable">返回舊金山</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                早上出發，路程約 4 小時。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+                <tr><th class="editable">下午</th><td>
+                    <details>
+                        <summary class="editable">灣區景點</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                視時間可以遊玩史丹福大學 (Stanford)、矽谷 (Silicon Valley) 等。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <h3 class="editable">🏨 住宿資訊</h3>
+            <div class="editable"><strong>舊金山</strong></div>
+            <button class="add-trip-btn" onclick="addTripRow('table-day9')">➕ 新增行程</button>
+        </div>
+    </div>
+    
+    <!-- [Day 10] 2.22 返程 -->
+    <div id="day10" class="page">
+        <div class="card">
+            <h2 class="editable">Day 10: 返程 (2.22)</h2>
+            <table class="time-table" id="table-day10">
+                <tr><th class="editable">上午</th><td>
+                    <details>
+                        <summary class="editable">前往機場</summary>
+                        <div class="detail-content">
+                            <div class="editable-content editable">
+                                整理行李，前往舊金山機場 (SFO) 搭機返台。
+                            </div>
+                        </div>
+                    </details>
+                </td></tr>
+            </table>
+            <button class="add-trip-btn" onclick="addTripRow('table-day10')">➕ 新增行程</button>
+        </div>
+    </div>
 
 </div>
 
@@ -410,7 +477,7 @@
 
 <script>
     window.onload = function() {
-        var saved = localStorage.getItem('trip_content_v6');
+        var saved = localStorage.getItem('trip_content_v7'); // Version updated
         if (saved) document.getElementById('mainContent').innerHTML = saved;
         var savedSize = localStorage.getItem('trip_font_size');
         if (savedSize) document.body.style.fontSize = savedSize + 'px';
@@ -440,13 +507,13 @@
             <th class="editable" contenteditable="true">時間</th>
             <td>
                 <details open>
-                    <summary class="editable" contenteditable="true">新景點名稱 (點擊修改)</summary>
+                    <summary class="editable" contenteditable="true">新行程名稱</summary>
                     <div class="detail-content">
                         <div class="editable-content editable" contenteditable="true">
                             請輸入詳細介紹...
                         </div>
                         <div class="img-container">
-                            <div class="editable" contenteditable="true">(點擊圖片區塊可換圖)</div>
+                            <div class="editable" contenteditable="true">(點擊換圖)</div>
                         </div>
                     </div>
                 </details>
@@ -474,7 +541,7 @@
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
             bindImgClick();
             
-            alert('✏️ 編輯模式開啟！\n- 點「➕」可新增行程\n- 點圖片可換圖\n- 右上角可調字體大小');
+            alert('✏️ 編輯模式開啟！\n- 可直接修改文字\n- 點「➕」可新增行程\n- 點圖片可換圖');
         } else {
             btn.innerHTML = '✏️';
             saveBtn.style.display = 'none';
@@ -513,7 +580,7 @@
         var editables = document.querySelectorAll('.editable');
         editables.forEach(el => el.removeAttribute('contenteditable'));
         var content = document.getElementById('mainContent').innerHTML;
-        localStorage.setItem('trip_content_v6', content);
+        localStorage.setItem('trip_content_v7', content);
         alert('✅ 儲存成功！');
         toggleEditMode();
     }
